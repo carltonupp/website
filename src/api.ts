@@ -1,4 +1,4 @@
-type Post = {
+export type Post = {
     title: string;
     slug: string;
     coverImageUrl: string;
