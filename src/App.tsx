@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { Post, getLastTenPosts } from "./api";
+import Postcard from "./Postcard";
 
 export function App() {
-
-  const [ posts, setPosts ] = useState([] as Post[]);
+  const [posts, setPosts] = useState([] as Post[]);
 
   useEffect(() => {
-    getLastTenPosts().then(p => setPosts(p));
-  })
+    if (posts.length < 1) {
+      getLastTenPosts().then((p) => setPosts(p));
+    }
+  });
 
   return (
     <div className="flex flex-col min-h-screen font-mono">
@@ -17,17 +19,16 @@ export function App() {
         </div>
       </header>
       <main>
-        { posts.map(post => {
-          return (
-            <div className="w-40">
-              <img src={post.coverImageUrl} />
-              <div>{post.title}</div>
-            </div>
-          );
-        })}
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {posts.map((post, i) => (
+              <Postcard key={i} post={post} />
+            ))}
+          </div>
+        </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
