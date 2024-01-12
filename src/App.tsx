@@ -1,7 +1,18 @@
+import { useState, useEffect } from "react";
 import Profile from "./Profile";
-import { TopPosts } from "./TopPosts";
+import { Post, recommendedPosts } from "./api";
+import Postcard from "./Postcard";
 
 export function App() {
+
+  const [posts, setPosts] = useState([] as Post[]);
+
+  useEffect(() => {
+    if (posts.length < 1) {
+      recommendedPosts().then((p) => setPosts(p));
+    }
+  });
+
   const currentYear = new Date().getFullYear();
   return (
     <div className="flex flex-col min-h-screen font-sans">
@@ -44,6 +55,12 @@ export function App() {
               </li>
             </ul>
           </div>
+          <div className="my-10">
+            <h3 className="text-2xl font-bold text-center">
+              Most Popular Posts
+            </h3>
+          </div>
+          {posts.map((post, i) => <Postcard key={i} post={post} />)}
         </div>
       </main>
       <footer className="bg-sky-900 mt-8 py-4">
