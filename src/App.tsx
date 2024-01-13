@@ -4,7 +4,6 @@ import { Post, recommendedPosts } from "./api";
 import Postcard from "./Postcard";
 
 export function App() {
-
   const [posts, setPosts] = useState([] as Post[]);
 
   useEffect(() => {
@@ -60,7 +59,9 @@ export function App() {
               Most Popular Posts
             </h3>
           </div>
-          {posts.map((post, i) => <Postcard key={i} post={post} />)}
+          {posts.map((post, i) => (
+            <Postcard key={i} post={post} />
+          ))}
         </div>
       </main>
       <footer className="bg-sky-900 mt-8 py-4">
