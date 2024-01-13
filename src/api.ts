@@ -1,85 +1,43 @@
 import _ from "lodash";
+import { gql } from "./__generated__/gql";
+import { PublicationQuery } from "./__generated__/graphql";
 
-export type Post = {
-  title: string;
-  subtitle: string;
-  slug: string;
-  brief: string;
-  coverImageUrl: string;
-  publishedDate: Date;
-  views: number;
-  reactionCount: number;
-};
-
-export async function recommendedPosts(): Promise<Post[]> {
-  return getLastTenPosts().then((posts) =>
-    _.sortBy(posts, (post) => post.views)
-      .reverse()
-      .slice(0, 3)
-  );
-}
-
-export async function getLastTenPosts(): Promise<Post[]> {
-  const query = `query Publication {
-        publication(host: "blog.upperdine.dev") {
-          posts(first: 10) {
-            edges {
-              node {
-                title
-                subtitle
-                slug
-                brief
-                coverImage{
-                  url
-                }
-                tags {
-                  slug
-                }
-                publishedAt
-                views
-                reactionCount
-              }
+export const GET_POSTS = gql(`
+  query Publication {
+    publication(host: "blog.upperdine.dev") {
+      posts(first: 10) {
+        edges {
+          node {
+            id
+            title
+            subtitle
+            slug
+            brief
+            coverImage {
+              url
+              isAttributionHidden
+              isPortrait
             }
+            tags {
+              slug
+            }
+            publishedAt
+            views
+            reactionCount
           }
         }
-      }`;
+      }
+    }
+  }
+`);
 
-  const response = await fetch("https://gql.hashnode.com/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({ query }),
-  });
-
-  const body = await response.json();
-
-  type Edge = {
-    node: {
-      title: string;
-      subtitle: string;
-      slug: string;
-      brief: string;
-      coverImage: {
-        url: string;
-      };
-      publishedAt: string | number | Date;
-      views: number;
-      reactionCount: number;
-    };
-  };
-
-  return body.data.publication.posts.edges.map((edge: Edge) => {
-    return {
-      title: edge.node.title,
-      subtitle: edge.node.subtitle,
-      slug: edge.node.slug,
-      brief: edge.node.brief,
-      coverImageUrl: edge.node.coverImage.url,
-      publishedDate: new Date(edge.node.publishedAt),
-      views: edge.node.views,
-      reactionCount: edge.node.reactionCount,
-    };
-  });
+export function getMostPopularPosts(query?: PublicationQuery) {
+  return _.take(
+    _.orderBy(
+      query?.publication?.posts.edges.map((edge) => edge.node),
+      (node) => node.views,
+      "desc"
+    ),
+    3
+  );
 }
