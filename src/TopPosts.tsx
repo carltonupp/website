@@ -2,18 +2,7 @@ import _ from "lodash";
 import Postcard from "./Postcard";
 import { useQuery } from "@apollo/client";
 import { gql } from "./__generated__/gql";
-
-export type Post = {
-  title: string;
-  subtitle: string;
-  slug: string;
-  brief: string;
-  coverImageUrl: string;
-  publishedDate: Date;
-  views: number;
-  reactionCount: number;
-};
-
+import { Post } from "./__generated__/graphql";
 
 const GET_POSTS = gql(`
   query Publication {
@@ -21,12 +10,15 @@ const GET_POSTS = gql(`
       posts(first: 10) {
         edges {
           node {
+            id
             title
             subtitle
             slug
             brief
             coverImage {
               url
+              isAttributionHidden
+              isPortrait
             }
             tags {
               slug
@@ -51,27 +43,12 @@ export default function TopPosts() {
         {loading && <p>Loading...</p>}
         {error && <span>Error: {error.message}</span>}
       </div>
-      {_.sortBy(data?.publication?.posts.edges, edge => edge.node.views)
+      {_.sortBy(data?.publication?.posts.edges, (edge) => edge.node.views)
         .reverse()
         .slice(0, 3)
-        .map((edge, index) => {
-          console.log(data);
-          return (
-            <Postcard
-              post={{
-                title: edge.node.title,
-                subtitle: edge.node.subtitle ?? "",
-                slug: edge.node.slug,
-                brief: edge.node.brief,
-                coverImageUrl: edge.node.coverImage?.url ?? "",
-                publishedDate: new Date(edge.node.publishedAt),
-                views: edge.node.views,
-                reactionCount: edge.node.reactionCount,
-              }}
-              key={index}
-            />
-          );
-        })}
+        .map((edge, index) => (
+          <Postcard post={edge.node as Post} key={index} />
+        ))}
     </div>
   );
 }
