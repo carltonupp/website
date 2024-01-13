@@ -3,7 +3,7 @@ import { SocialIcon } from "react-social-icons";
 export default function Profile() {
   const socialLinks = [
     "https://github.com/carltonupp",
-    "https://twitter.com/carltonupp",
+    "https://x.com/carltonupp",
     "https://linkedin.com/in/carltonupp",
   ];
 
