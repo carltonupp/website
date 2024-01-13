@@ -1,6 +1,7 @@
 import _ from "lodash";
 import Postcard from "./Postcard";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { gql } from "./__generated__/gql";
 
 export type Post = {
   title: string;
@@ -14,7 +15,7 @@ export type Post = {
 };
 
 
-const GET_POSTS = gql`
+const GET_POSTS = gql(`
   query Publication {
     publication(host: "blog.upperdine.dev") {
       posts(first: 10) {
@@ -38,22 +39,7 @@ const GET_POSTS = gql`
       }
     }
   }
-`;
-
-type Edge = {
-  node: {
-    title: string;
-    subtitle: string;
-    slug: string;
-    brief: string;
-    coverImage: {
-      url: string;
-    };
-    publishedAt: string | number | Date;
-    views: number;
-    reactionCount: number;
-  };
-};
+`);
 
 export default function TopPosts() {
   const { loading, error, data } = useQuery(GET_POSTS);
@@ -65,19 +51,19 @@ export default function TopPosts() {
         {loading && <p>Loading...</p>}
         {error && <span>Error: {error.message}</span>}
       </div>
-      {_.sortBy(data?.publication.posts.edges, (edge: Edge) => edge.node.views)
+      {_.sortBy(data?.publication?.posts.edges, edge => edge.node.views)
         .reverse()
         .slice(0, 3)
-        .map((edge: Edge, index: number) => {
+        .map((edge, index) => {
           console.log(data);
           return (
             <Postcard
               post={{
                 title: edge.node.title,
-                subtitle: edge.node.subtitle,
+                subtitle: edge.node.subtitle ?? "",
                 slug: edge.node.slug,
                 brief: edge.node.brief,
-                coverImageUrl: edge.node.coverImage.url,
+                coverImageUrl: edge.node.coverImage?.url ?? "",
                 publishedDate: new Date(edge.node.publishedAt),
                 views: edge.node.views,
                 reactionCount: edge.node.reactionCount,
