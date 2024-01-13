@@ -1,11 +1,9 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Profile from "./Profile";
 import TopPosts from "./TopPosts";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 export function App() {
   const currentYear = new Date().getFullYear();
-  const queryClient = new QueryClient();
   const apolloClient = new ApolloClient({
     uri: 'https://gql.hashnode.com/',
     cache: new InMemoryCache(),
@@ -13,7 +11,6 @@ export function App() {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <QueryClientProvider client={queryClient}>
         <div className="flex flex-col min-h-screen font-sans">
           <header className="bg-sky-900 mb-8 py-4">
             <div className="container mx-auto text-center md:text-left md:flex justify-center text-white text-xl">
@@ -63,7 +60,6 @@ export function App() {
             </div>
           </footer>
         </div>
-      </QueryClientProvider>
     </ApolloProvider>
   );
 }
