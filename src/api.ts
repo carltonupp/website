@@ -55,7 +55,22 @@ export async function getLastTenPosts(): Promise<Post[]> {
 
   const body = await response.json();
 
-  return body.data.publication.posts.edges.map((edge) => {
+  type Edge = {
+    node: {
+      title: string;
+      subtitle: string;
+      slug: string;
+      brief: string;
+      coverImage: {
+        url: string;
+      };
+      publishedAt: string | number | Date;
+      views: number;
+      reactionCount: number;
+    };
+  };
+
+  return body.data.publication.posts.edges.map((edge: Edge) => {
     return {
       title: edge.node.title,
       subtitle: edge.node.subtitle,
