@@ -1,6 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons'
-import { Post } from './__generated__/graphql';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendar,
+  faMagnifyingGlass,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
+import { Post } from "./__generated__/graphql";
 
 type PostcardProps = {
   post: Post;
@@ -20,17 +24,26 @@ export default function Postcard({ post }: PostcardProps) {
       <div className="inline-block align-top pb-5">
         <div className="font-bold text-lg">{post.title}</div>
         <div className="mt-5">
-        <FontAwesomeIcon icon={faCalendar} className="text-slate-600 hover:text-sky-900 hover:text-bold" />
+          <FontAwesomeIcon
+            icon={faCalendar}
+            className="text-slate-600 hover:text-sky-900 hover:text-bold"
+          />
           <span className="font-bold ml-5">
             {new Date(post.publishedAt).toLocaleDateString()}
           </span>
         </div>
         <div>
-        <FontAwesomeIcon icon={faMagnifyingGlass } className="text-slate-600 hover:text-sky-900" />
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="text-slate-600 hover:text-sky-900"
+          />
           <span className="font-bold ml-5">{post.views}</span>
         </div>
         <div>
-        <FontAwesomeIcon icon={faHeart} className="text-slate-600 hover:text-sky-900 hover:text-bold" />
+          <FontAwesomeIcon
+            icon={faHeart}
+            className="text-slate-600 hover:text-sky-900 hover:text-bold"
+          />
           <span className="font-bold ml-5">{post.reactionCount}</span>
         </div>
       </div>
