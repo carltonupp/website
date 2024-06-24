@@ -12,6 +12,7 @@
     "apollo:watch": "graphql-codegen -w"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",

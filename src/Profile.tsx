@@ -1,12 +1,6 @@
-import { SocialIcon } from "react-social-icons";
+import { TwitterCircleFilled, LinkedinFilled, GithubFilled } from "@ant-design/icons";
 
 export default function Profile() {
-  const socialLinks = [
-    "https://github.com/carltonupp",
-    "https://x.com/carltonupp",
-    "https://linkedin.com/in/carltonupp",
-  ];
-
   return (
     <div className="mb-5">
       <div className="justify-center flex">
@@ -19,17 +13,9 @@ export default function Profile() {
         />
       </div>
       <div className="justify-center flex mt-5">
-        {socialLinks.map((sl, i) => {
-          return (
-            <SocialIcon
-              className="ml-1 mr-1"
-              key={i}
-              url={sl}
-              data-testid="social-link"
-              style={{ height: 30, width: 30 }}
-            />
-          );
-        })}
+        <TwitterCircleFilled href="https://x.com/carltonupp" />
+        <GithubFilled href="https://github.com/carltonupp" />
+        <LinkedinFilled  href="https://linkedin.com/in/carltonupp" />
       </div>
     </div>
   );
