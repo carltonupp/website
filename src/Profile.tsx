@@ -13,9 +13,9 @@ export default function Profile() {
         />
       </div>
       <div className="justify-center flex mt-5">
-        <TwitterCircleFilled href="https://x.com/carltonupp" />
-        <GithubFilled href="https://github.com/carltonupp" />
-        <LinkedinFilled  href="https://linkedin.com/in/carltonupp" />
+        <a href="https://x.com/carltonupp" className="mr-5 text-3xl hover:text-slate-500"><TwitterCircleFilled /></a>
+        <a href="https://github.com/carltonupp" className="mr-5 text-3xl hover:text-slate-500"><GithubFilled /></a>
+        <a href="https://linkedin.com/in/carltonupp" className="text-3xl hover:text-slate-500"><LinkedinFilled /></a>
       </div>
     </div>
   );
