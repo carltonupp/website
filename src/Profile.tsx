@@ -6,8 +6,8 @@ export default function Profile() {
       <div className="justify-center flex">
         <img
           className="rounded-full"
-          src="/pfp.jpg"
-          alt="me enjoying the scenery of Zakynthos town"
+          src="/boat.JPEG"
+          alt="me on a boat in the Indian Ocean"
           width={150}
           height={150}
         />
