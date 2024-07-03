@@ -6,8 +6,7 @@ export function App() {
     <div className="flex flex-col min-h-screen font-sans bg-slate-700 text-white">
       <header>
         <div className="text-center mt-10">
-          <div className="text-5xl">Carlton Upperdine</div>
-          <div className="text-3xl my-5">Software Engineer</div>
+          <div className="text-5xl mb-10">Carlton Upperdine</div>
         </div>
       </header>
       <main className="container mx-auto flex-1">

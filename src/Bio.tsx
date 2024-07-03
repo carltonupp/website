@@ -3,20 +3,23 @@ export default function Bio() {
     <div className="mt-5 text-2xl">
       <ul>
         <li className="mb-5">
-          I&apos;m a software engineer based in the UK, having worked in the
-          tech industry since 2011.
+          Hello! My name is <strong>Carlton Upperdine</strong>, and I am a
+          Software Engineer currently based in Sheffield, UK.
         </li>
         <li className="mb-5">
-          My core languages are C# and TypeScript, but I believe in using the
-          right tools for the job.
+          Throughout my career I have worn many hats, having worked in technical
+          capabilities such as Software Engineering, QA, SRE/DevOps, Agile
+          Delivery and more recently as a Consultant.
         </li>
         <li className="mb-5">
-          Away from my computer, you&apos;ll find me obsessively watching UFC,
-          failing at Latte art, and spending time with my fiancée and two cats.
+          I started out my career in the .NET/Microsoft space, but in recent
+          years I have had the opportunity to work in a more tech agnostic way
+          and have gained experience with languages such as Java, TypeScript and
+          Go.
         </li>
         <li>
-          Check out my socials and blog for insights and experiences from my
-          work as a software engineer. Cheers! 🚀
+          My writing can be found on <a className="text-slate-500" href="https://linkedin.com/in/carltonupp">LinkedIn</a>, or if you prefer more short form
+          content I can be found on <a className="text-slate-500" href="https://x.com/carltonupp">Twitter/X</a>.
         </li>
       </ul>
     </div>
